@@ -1,0 +1,310 @@
+/* ========================================
+   RESET ET VARIABLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dodger-blue: #1e90ff;
+  --dodger-blue-dark: #1873cc;
+  --dodger-blue-light: #4da6ff;
+  --sidebar-bg: #f8f9fa;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   POLICE GLOBALE
+   ======================================== */
+
+body {
+  font-family: 'Segoe UI', Calibri, 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   BARRE DE NAVIGATION SUPÉRIEURE
+   ======================================== */
+
+.top-navbar {
+  background: var(--dodger-blue);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--dodger-blue);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  max-width: 100%;
+}
+
+/* Logo */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-section:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  font-size: 32px;
+  filter: drop-shadow(2px 2px 4px rgba(30, 144, 255, 0.3));
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dodger-blue);
+  letter-spacing: 0.5px;
+}
+
+/* Bouton de connexion */
+.btn-connexion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--dodger-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Calibri, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+}
+
+.btn-connexion:hover {
+  background: var(--dodger-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 144, 255, 0.4);
+}
+
+.btn-connexion:active {
+  transform: translateY(0);
+}
+
+.btn-connexion mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+/* ========================================
+   CONTAINER PRINCIPAL
+   ======================================== */
+
+.main-container {
+  height: calc(100vh - 70px); /* Hauteur moins la navbar */
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.custom-sidenav {
+  width: 260px !important;
+  background: var(--sidebar-bg) !important;
+  border-right: 2px solid var(--dodger-blue-light);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header {
+  padding: 24px 20px 16px 20px;
+  border-bottom: 2px solid rgba(30, 144, 255, 0.2);
+}
+
+.sidebar-header h3 {
+  color: var(--dodger-blue);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Navigation list */
+.nav-list {
+  padding: 16px 8px !important;
+}
+
+.nav-list a {
+  display: flex !important;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px !important;
+  margin: 8px 0;
+  border-radius: 12px;
+  color: var(--text-primary) !important;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Calibri, sans-serif;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-list a:hover {
+  background: rgba(30, 144, 255, 0.1) !important;
+  color: var(--dodger-blue) !important;
+  transform: translateX(4px);
+}
+
+.nav-list a.active-link {
+  background: var(--dodger-blue) !important;
+  color: var(--white) !important;
+  box-shadow: 0 4px 8px rgba(30, 144, 255, 0.3);
+}
+
+.nav-icon {
+  color: inherit !important;
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.nav-text {
+  font-family: 'Segoe UI', Calibri, sans-serif;
+}
+
+/* ========================================
+   CONTENU PRINCIPAL
+   ======================================== */
+
+.main-content {
+  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+  padding: 32px;
+  overflow-y: auto;
+}
+
+/* Scroll bar personnalisée */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--dodger-blue-light);
+  border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: var(--dodger-blue);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 12px 16px;
+  }
+
+  .logo-text {
+    font-size: 24px;
+  }
+
+  .logo-icon {
+    font-size: 28px;
+  }
+
+  .btn-connexion {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .btn-connexion span {
+    display: none; /* Cacher le texte sur mobile */
+  }
+
+  .custom-sidenav {
+    width: 200px !important;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-list a {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.nav-list a:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.nav-list a:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.nav-list a:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ========================================
+   EFFETS SUPPLÉMENTAIRES
+   ======================================== */
+
+/* Effet de brillance sur le logo */
+@keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.logo-text {
+  background: linear-gradient(90deg, 
+    var(--dodger-blue) 0%, 
+    var(--dodger-blue-light) 50%, 
+    var(--dodger-blue) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}

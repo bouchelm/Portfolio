@@ -1,0 +1,118 @@
+<div class="planificateurs-container">
+  
+  <h2>Carte des livraisons 🗺️</h2>
+  
+  <!-- La carte -->
+  <div class="map-container"
+       leaflet
+       [leafletOptions]="options"
+       [leafletLayers]="allLayers()"
+       (leafletMapReady)="onMapReady($event)">
+  </div>
+
+  <!-- Séparation claire avec les autres éléments -->
+  <hr style="margin: 40px 0;">
+
+<h2>Commandes Ouvertes</h2>
+<select (change)="selectionnerCommande($event)" id="commande-select">
+    <option value="">Sélectionner une commande</option>
+   @for(commande of commandesOuvertes(); track commande){
+    <option [value]="commande.reference">
+         {{commande.reference}}
+    </option>
+   }
+   
+  </select>
+  @if (commandeSelectionnee()){
+     <div  class="commande-info-container">
+          <table>
+             <tr>
+               <td>Etat : {{commandeSelectionnee().etat}}</td>
+             </tr>
+             <tr>
+               <td>Client :{{commandeSelectionnee().client.prenom}} {{commandeSelectionnee().client.nom}}</td>
+             </tr>
+             <tr>
+               <td>Date : {{commandeSelectionnee().dateCreation}}</td>
+             </tr>
+             @if(commandeSelectionnee().note){
+               <tr>
+                    <td>Note : {{commandeSelectionnee().note}}</td>
+             </tr>
+             }@else {
+               <tr>
+                    <td>Note : aucune note</td>
+                  </tr>
+             }
+             
+             @if(commandeSelectionnee().commentaire){
+               <tr>
+                    <td>Commentaire : "{{commandeSelectionnee().commentaire}}"</td>
+             </tr>
+             }@else {
+               <tr>
+                    <td>Commentaire : Pas de Commentaire</td>
+                  </tr>
+             }
+          </table>
+        </div>
+  }
+
+
+  <button class="planificateurs-container" (click)="migrerDonneesVersFirestore()">migration</button>
+  <h2>Employés</h2>
+  <select id="commande-select"> 
+    <option value="">Selectionner un Livreur</option>
+    @for(employe of employes(); track employe){
+      @if(employe.emploi == "livreur" ) {
+        <option [value]="employe.nom"> {{employe.prenom}} {{employe.nom}}</option>
+      }
+
+    }
+  </select>
+
+  <h2>Ajouter une Tournée</h2>
+  <div class="tournee-form-container">
+
+<form [formGroup]="tourneeForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom de la tournée</mat-label>
+    <input matInput formControlName="nom" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date de la tournée</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Commandes</mat-label>
+    <mat-select formControlName="commandes" multiple>
+      @for (commande of filteredCommandes(); track commande.reference) {
+        <mat-option [value]="commande">
+          {{ commande.reference }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Livreurs</mat-label>
+    <mat-select formControlName="livreurs" multiple>
+      @for (livreur of filteredLivreurs(); track livreur.trigramme) {
+        <mat-option [value]="livreur">
+          {{livreur.prenom}}{{livreur.nom}}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" 
+          [disabled]="!tourneeForm.valid">
+    Créer la tournée
+  </button>
+</form>
+</div>
+  

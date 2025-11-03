@@ -1,0 +1,47 @@
+<!-- Barre de navigation supérieure -->
+<div class="top-navbar">
+  <div class="navbar-content">
+    <!-- Logo -->
+    <div class="logo-section">
+      <div class="logo-icon">🚚</div>
+      <span class="logo-text">Mobilis</span>
+    </div>
+
+    <!-- Bouton de connexion -->
+    <button class="btn-connexion" [routerLink]="['/authentification']">
+      <mat-icon>person</mat-icon>
+      <span>Connexion</span>
+    </button>
+  </div>
+</div>
+
+<!-- Container principal avec sidebar -->
+<div class="main-container">
+  <mat-sidenav-container class="sidenav-container">
+    
+    <!-- Sidebar -->
+    <mat-sidenav mode="side" opened class="custom-sidenav">
+      <div class="sidebar-header">
+        <h3>Navigation</h3>
+      </div>
+      
+      <mat-nav-list class="nav-list">
+        <a mat-list-item [routerLink]="['/planificateurs']" routerLinkActive="active-link">
+          <mat-icon class="nav-icon">calendar_today</mat-icon>
+          <span class="nav-text">Planificateurs</span>
+        </a>
+        
+        <a mat-list-item [routerLink]="['/livreurs']" routerLinkActive="active-link">
+          <mat-icon class="nav-icon">local_shipping</mat-icon>
+          <span class="nav-text">Livreurs</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Contenu principal -->
+    <mat-sidenav-content class="main-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>
+</div>
